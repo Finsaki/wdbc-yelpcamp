@@ -10,8 +10,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 
-const campgroundRoute = require("./routes/campgrounds");
-const reviewRoute = require("./routes/reviews");
+const campgroundRoutes = require("./routes/campgrounds");
+const reviewRoutes = require("./routes/reviews");
+const userRoutes = require("./routes/users");
 
 mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp", {
   useNewUrlParser: true,
@@ -55,14 +56,16 @@ passport.deserializeUser(User.deserializeUser());
 
 //this before route handlers
 app.use((req, res, next) => {
+  res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
   next();
 });
 
-app.use("/campgrounds", campgroundRoute);
+app.use("/", userRoutes);
+app.use("/campgrounds", campgroundRoutes);
 //{ mergeParams: true } needs to be set in review router for inner param to work
-app.use("/campgrounds/:id/reviews", reviewRoute);
+app.use("/campgrounds/:id/reviews", reviewRoutes);
 
 app.get("/", (req, res) => {
   res.render("home");
