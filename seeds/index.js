@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const cities = require("./cities");
 const { places, descriptors } = require("./seedHelpers");
@@ -25,8 +26,20 @@ const seedDB = async () => {
       author: "64915b6773c62b4b497186ee",
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image:
-        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHw0ODQzNTF8fHx8fHx8MTY4NDY5NzM5MQ&ixlib=rb-4.0.3&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
+      images: [
+        {
+          url: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1687461024/YelpCamp/cu68hiqiwzor0syh8meh.png`,
+          filename: "YelpCamp/cu68hiqiwzor0syh8meh",
+        },
+        {
+          url: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1687461024/YelpCamp/xfh4tixs0czmcbwvmyof.png`,
+          filename: "YelpCamp/xfh4tixs0czmcbwvmyof",
+        },
+        {
+          url: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1687461024/YelpCamp/rf6asb6f8autylyelceh.png`,
+          filename: "YelpCamp/rf6asb6f8autylyelceh",
+        },
+      ],
       description:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi sapiente voluptate dolorum beatae animi, at eius voluptates officiis cumque eum ab exercitationem quos dicta culpa. Odio natus eveniet tempore molestiae.",
       price,
