@@ -7,7 +7,16 @@
 <div class="card mb-3">
   <div class="row">
     <div class="col-md-4">
+      <!-- TODO: Make sure to handle problems with not having images in show, edit etc, mayby a default mandatory image -->
+      <% if (campground.images.length) { %>
       <img src="<%= campground.images[0].url %>" class="img-fluid" alt="" />
+      <% } else { %>
+      <img
+        src="<%=`https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1687426898/samples/landscapes/nature-mountains.jpg`%>"
+        class="img-fluid"
+        alt=""
+      />
+      <% } %>
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -16,7 +25,7 @@
         <p class="card-text">
           <small class="text-secondary"><%= campground.location %></small>
         </p>
-        <a href="campgrounds/<%= campground._id %>" class="btn btn-primary">
+        <a href="/campgrounds/<%= campground._id %>" class="btn btn-primary">
           View <%= campground.title %>
         </a>
       </div>

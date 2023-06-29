@@ -21,6 +21,7 @@ module.exports.createCampground = async (req, res, next) => {
     })
     .send();
   const campground = new Campground(req.body.campground);
+  //TODO: Create a default pin location if none was found
   campground.geometry = geoData.body.features[0].geometry;
   campground.images = req.files.map((f) => ({
     url: f.path,
