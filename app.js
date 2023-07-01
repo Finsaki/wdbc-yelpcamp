@@ -63,7 +63,7 @@ passport.deserializeUser(User.deserializeUser());
 
 //this before route handlers
 app.use((req, res, next) => {
-  console.log(req.query);
+  //console.log(req.query); //TODO: delete later
   res.locals.currentUser = req.user;
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
