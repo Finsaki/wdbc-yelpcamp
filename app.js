@@ -42,11 +42,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
 const sessionConfig = {
-  secret: "thisshouldbeabettersecret",
+  name: "session", //overrides the default name (connect.sid) with something that people are not already on the lookout for
+  secret: "thisshouldbeabettersecret", //TODO: configure in .env
   resave: false,
   saveUninitialized: true,
   cookie: {
-    httpOnly: true,
+    httpOnly: true, //the cookie is set to not be accessible through JavaScript
+    //secure: true, //Tells that the cookie should only work in HTTPS, NEEDS TO BE COMMENTED OUT ON LOCALHOST!
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
