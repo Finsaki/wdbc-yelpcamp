@@ -13,6 +13,7 @@ const ExpressError = require("./utils/ExpressError");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const mongoSanitize = require("express-mongo-sanitize");
+const helmet = require("helmet");
 const User = require("./models/user");
 
 const campgroundRoutes = require("./routes/campgrounds");
@@ -55,6 +56,7 @@ const sessionConfig = {
 };
 app.use(session(sessionConfig));
 app.use(flash());
+app.use(helmet({ contentSecurityPolicy: false })); //automatically enables all helmet middlewares
 
 app.use(passport.initialize());
 //enables persistent login sessions. app(session()) goes before this

@@ -10,12 +10,18 @@
     <div class="col-md-4">
       <!-- TODO: Make sure to handle problems with not having images in show, edit etc, mayby a default mandatory image -->
       <% if (campground.images.length) { %>
-      <img src="<%= campground.images[0].url %>" class="img-fluid" alt="" />
+      <img
+        src="<%= campground.images[0].url %>"
+        class="img-fluid"
+        alt=""
+        crossorigin="anonymous"
+      />
       <% } else { %>
       <img
         src="<%=`https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/v1687426898/samples/landscapes/nature-mountains.jpg`%>"
         class="img-fluid"
         alt=""
+        crossorigin="anonymous"
       />
       <% } %>
     </div>
