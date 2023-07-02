@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
 const methodOverride = require("method-override");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const ExpressError = require("./utils/ExpressError");
 const passport = require("passport");
@@ -20,7 +21,9 @@ const campgroundRoutes = require("./routes/campgrounds");
 const reviewRoutes = require("./routes/reviews");
 const userRoutes = require("./routes/users");
 
-mongoose.connect("mongodb://127.0.0.1:27017/yelp-camp", {
+//const dbUrl = process.env.DB_URL;
+const dbUrl = "mongodb://127.0.0.1:27017/yelp-camp";
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -42,7 +45,19 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 app.use(mongoSanitize());
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  touchAfter: 24 * 60 * 60,
+  crypto: {
+    secret: "thisshouldbeabettersecret!", //TODO: configure in .env
+  },
+});
+store.on("error", function (e) {
+  console.log("SESSION STORE ERROR", e);
+});
+
 const sessionConfig = {
+  store, //if not specified, uses localstorage
   name: "session", //overrides the default name (connect.sid) with something that people are not already on the lookout for
   secret: "thisshouldbeabettersecret", //TODO: configure in .env
   resave: false,
