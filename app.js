@@ -15,6 +15,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const mongoSanitize = require("express-mongo-sanitize");
 const helmet = require("helmet");
+const morgan = require("morgan");
 const User = require("./models/user");
 
 const campgroundRoutes = require("./routes/campgrounds");
@@ -125,6 +126,8 @@ app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(morgan("tiny"));
 
 //this before route handlers
 app.use((req, res, next) => {
