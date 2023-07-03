@@ -22,9 +22,28 @@ Also for geolocation data to work, create a [Mapbox account](https://www.mapbox.
 MAPBOX_TOKEN=
 ```
 
+### Production
+
+For production environment we use [MongoDB Atlas](https://www.mongodb.com/products/platform/cloud) to store our data and sessions.
+
+To set up Atlas do the following:
+
+- Create Database into Atlas (Shared -tier is free)
+- Create database user and password
+- Whitelist your IP's that connect to the database
+- Define DB_URL as a environmental variable for mongo Atlas connection (contains database user and password)
+
+In production environment the following environmental variables should be defined in addition to previously mentioned .env values.
+
+```
+DB_URL=
+SECRET=
+PORT=
+```
+
 ## Starting the development server
 
-> node app.js
+> npm start
 
 OR
 
