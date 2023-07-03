@@ -4,6 +4,34 @@ Project built by following Colt Steele's The Web Developer Bootcamp 2023.
 
 > https://www.udemy.com/course/the-web-developer-bootcamp/
 
+## About
+
+The purpose of the application is to provide a "Yelp-like" website where users can browse, add, edit and review different campgrounds.
+
+### Functionality
+
+The implemented features of the application are as follows:
+
+- All users
+  - can register and login to the website.
+  - can view a listing of all the campgrounds
+  - can view specifics for each campground
+  - can view reviews for each campground
+  - can view the location of each campground on the world map
+- Logged in users
+  - can logout of the website
+  - can add new campgrounds
+  - can review any campgrounds
+  - can remove the reviews they have made
+  - can edit their own campgrounds
+  - can remove their own campgrounds
+
+### Technologies
+
+This application is built mainly with Node.js and uses EJS to display web pages. The application also connects to many different external APIs to use cloud resources.
+
+See [tech.md](tech.md) for specific information about the technology stack.
+
 ## Setup
 
 Make sure MondoDB is connected and running. Detailed instructions [here](https://zarkom.net/blogs/how-to-install-mongodb-for-development-in-windows-3328).
